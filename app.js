@@ -44,13 +44,13 @@ function addOrder() {
     }
 
     if (parseFloat(qty4.value) > 0) {
-        var order = `${qty4.value} pc/s x ${price4.textContent} ------ HGHMNDS - VOLUME  RISE  SHIRT ------ Php ${(parseFloat(qty4.value) * parseFloat(price4.textContent)).toFixed(2)}\n`;
+        var order = `${qty4.value} pc/s x ${price4.textContent} ------ HGHMNDS - SLEEP VISUALS SHIRT ------ Php ${(parseFloat(qty4.value) * parseFloat(price4.textContent)).toFixed(2)}\n`;
         carts.textContent += order;
         totalAmount += parseFloat(qty4.value) * parseFloat(price4.textContent);
     }
 
     if (parseFloat(qty5.value) > 0) {
-        var order = `${qty5.value} pc/s x ${price5.textContent} ------ HGHMNDS - SLEEP VISUALS SHIRT ------ Php ${(parseFloat(qty5.value) * parseFloat(price5.textContent)).toFixed(2)}\n`;
+        var order = `${qty5.value} pc/s x ${price5.textContent} ------ HGHMNDS - VOLUME RISE SHIRT ------ Php ${(parseFloat(qty5.value) * parseFloat(price5.textContent)).toFixed(2)}\n`;
         carts.textContent += order;
         totalAmount += parseFloat(qty5.value) * parseFloat(price5.textContent);
     }
