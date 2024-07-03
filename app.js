@@ -1,38 +1,87 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-    const products = [
-        { qty: document.getElementById('qty1'), price: parseFloat(document.getElementById('price1').innerText), label: 'HGHMNDS - MIND VISION SHIRT' },
-        { qty: document.getElementById('qty2'), price: parseFloat(document.getElementById('price2').innerText), label: 'HGHMNDS - GEMINI GEMS SHIRT' },
-        { qty: document.getElementById('qty3'), price: parseFloat(document.getElementById('price3').innerText), label: 'HGHMNDS - SLEEP VISUALS SHIRT' },
-        { qty: document.getElementById('qty4'), price: parseFloat(document.getElementById('price4').innerText), label: 'HGHMNDS - VOLUME RISE SHIRT' },
-        { qty: document.getElementById('qty5'), price: parseFloat(document.getElementById('price5').innerText), label: 'HGHMNDS - MIND VISION SHIRT' },
-        { qty: document.getElementById('qty6'), price: parseFloat(document.getElementById('price6').innerText), label: 'HGHMNDS - STEEL WORKS SHIRT' }
-    ];
+var qty1 = document.getElementById("qty1");
+var price1 = document.getElementById("price1");
 
-    const carts = document.getElementById('carts');
-    const total = document.getElementById('total');
-    const cash = document.getElementById('cash');
-    const change = document.getElementById('change');
+var qty2 = document.getElementById("qty2");
+var price2 = document.getElementById("price2");
 
-    function updateOrders() {
-        let totalPrice = 0;
-        carts.value = '';
+var qty3 = document.getElementById("qty3");
+var price3 = document.getElementById("price3");
 
-        products.forEach(product => {
-            const qtyValue = parseInt(product.qty.value) || 0;
-            if (qtyValue > 0) {
-                const itemTotal = qtyValue * product.price;
-                totalPrice += itemTotal;
-                carts.value += `${product.label} x ${qtyValue} @ ${product.price} each\n`;
-            }
-        });
+var qty4 = document.getElementById("qty4");
+var price4 = document.getElementById("price4");
 
-        total.value = totalPrice.toFixed(2);
+var qty5 = document.getElementById("qty5");
+var price5 = document.getElementById("price5");
 
-        const cashValue = parseFloat(cash.value) || 0;
-        const changeValue = cashValue - totalPrice;
-        change.value = changeValue.toFixed(2);
+var qty6 = document.getElementById("qty6");
+var price6 = document.getElementById("price6");
+
+var carts = document.getElementById("carts");
+var total = document.getElementById("total");
+var cash = document.getElementById("cash");
+var change = document.getElementById("change");
+
+function addOrder() {
+    carts.textContent = "";
+    var totalAmount = 0;
+
+    if (parseFloat(qty1.value) > 0) {
+        var order = `${qty1.value} pc/s x ${price1.textContent} ------ HGHMNDS - MIND VISION SHIRT ------ Php ${(parseFloat(qty1.value) * parseFloat(price1.textContent)).toFixed(2)}\n`;
+        carts.textContent += order;
+        totalAmount += parseFloat(qty1.value) * parseFloat(price1.textContent);
     }
 
-    products.forEach(product => product.qty.addEventListener('input', updateOrders));
-    cash.addEventListener('input', updateOrders);
-});
+    if (parseFloat(qty2.value) > 0) {
+        var order = `${qty2.value} pc/s x ${price2.textContent} ------ HGHMNDS - GEMINI GEMS SHIRT ------ Php ${(parseFloat(qty2.value) * parseFloat(price2.textContent)).toFixed(2)}\n`;
+        carts.textContent += order;
+        totalAmount += parseFloat(qty2.value) * parseFloat(price2.textContent);
+    }
+
+    if (parseFloat(qty3.value) > 0) {
+        var order = `${qty3.value} pc/s x ${price3.textContent} ------ HGHMNDS - GOOD FAITH SHIRT  ------ Php ${(parseFloat(qty3.value) * parseFloat(price3.textContent)).toFixed(2)}\n`;
+        carts.textContent += order;
+        totalAmount += parseFloat(qty3.value) * parseFloat(price3.textContent);
+    }
+
+    if (parseFloat(qty4.value) > 0) {
+        var order = `${qty4.value} pc/s x ${price4.textContent} ------ HGHMNDS - VOLUME  RISE  SHIRT ------ Php ${(parseFloat(qty4.value) * parseFloat(price4.textContent)).toFixed(2)}\n`;
+        carts.textContent += order;
+        totalAmount += parseFloat(qty4.value) * parseFloat(price4.textContent);
+    }
+
+    if (parseFloat(qty5.value) > 0) {
+        var order = `${qty5.value} pc/s x ${price5.textContent} ------ HGHMNDS - SLEEP VISUALS SHIRT ------ Php ${(parseFloat(qty5.value) * parseFloat(price5.textContent)).toFixed(2)}\n`;
+        carts.textContent += order;
+        totalAmount += parseFloat(qty5.value) * parseFloat(price5.textContent);
+    }
+
+    if (parseFloat(qty6.value) > 0) {
+        var order = `${qty6.value} pc/s x ${price6.textContent} ------ HGHMNDS - STEEL WORKS SHIRT ------ Php ${(parseFloat(qty6.value) * parseFloat(price6.textContent)).toFixed(2)}\n`;
+        carts.textContent += order;
+        totalAmount += parseFloat(qty6.value) * parseFloat(price6.textContent);
+    }
+
+    total.value = `Total: Php ${totalAmount.toFixed(2)}`;
+    updateChange(totalAmount);
+}
+
+function updateChange(totalAmount) {
+    if (parseFloat(cash.value) > 0) {
+        var changeAmount = parseFloat(cash.value) - totalAmount;
+        change.value = `Change: Php ${changeAmount.toFixed(2)}`;
+    } else {
+        change.value = "";
+    }
+}
+
+qty1.addEventListener("input", addOrder);
+qty2.addEventListener("input", addOrder);
+qty3.addEventListener("input", addOrder);
+qty4.addEventListener("input", addOrder);
+qty5.addEventListener("input", addOrder);
+qty6.addEventListener("input", addOrder);
+
+cash.addEventListener("input", function () {
+    var totalAmount = parseFloat(total.value.split('Php ')[1]);
+    updateChange(totalAmount);
+});          
